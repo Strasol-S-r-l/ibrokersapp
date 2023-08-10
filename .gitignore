@@ -82,8 +82,10 @@ yarn-error.log*
 /enviroments/api.json
 
 /android/app/debug.keystore
+/android/app/app.jks
 /android/app/service-account.json
 /android/app/src/main/res/values/strings.xml
+/android/keystore.properties
 
 /ios/GoogleService-Info.plist
 /ios/distribuidora_dhm_app/Info.plist
