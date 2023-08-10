@@ -82,6 +82,7 @@ yarn-error.log*
 /enviroments/api.json
 
 /android/app/debug.keystore
+/android/app/my-release-key.keystore
 /android/app/app.jks
 /android/app/service-account.json
 /android/app/src/main/res/values/strings.xml
