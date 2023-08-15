@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Text,ScrollView, View, StyleSheet, ActivityIndicator, Image, ImageBackground, TouchableOpacity, FlatList } from 'react-native';
-import Swimper from "react-native-swiper";
 import BarFooter from './BarFooter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../enviroments/api.json'
@@ -75,7 +74,7 @@ const Ppl = ({navigation}:any) => {
     return (
         <View >
             { <ImageBackground 
-                source={require('../images/fondo.gif')}
+                source={require('../images/fondo.png')}
                 style={{height:'100%', width:'100%'}}>
                 {data?productos():<View style={{flex:1, width:'100%', justifyContent:'center', alignItems:'center' ,backgroundColor:'rgba(0,0,0,0.7)'}}><ActivityIndicator size={'large'} color={'white'}/></View>}
                 <BarFooter></BarFooter>

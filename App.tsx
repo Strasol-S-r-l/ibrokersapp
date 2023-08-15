@@ -25,7 +25,6 @@ function App(): JSX.Element {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="Usuarios" component={Usuarios} />
         <Stack.Screen name="Companias" component={Companias} />
         <Stack.Screen name="Notificaciones" component={Notificaciones} />
