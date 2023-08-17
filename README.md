@@ -16,7 +16,7 @@ keytool -import -alias key0 -file output.pem -keystore app.jks -storepass pass -
 
 echo y |
 keytool -genkeypair -dname "cn=Strasol, ou=Strasol, o=SRL, c=BO" -alias key0 -keypass pass -keystore android.keystore -storepass pass -validity 20000
-echo y | keytool -genkeypair -dname "cn=Strasol, ou=Strasol, o=SRL, c=BO" -alias key0 -keypass pass -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 365 -keystore app.jks  -storepass pass
+echo y | keytool -genkeypair -dname "cn=Strasol, ou=Strasol, o=SRL, c=BO" -alias key0 -keypass pass -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 9125 -keystore app.jks  -storepass pass
 
 ```
 
