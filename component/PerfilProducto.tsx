@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView,TouchableOpacity, Text, View, StyleSheet, Image, Alert, ImageBackground, ActivityIndicator, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../enviroments/api.json'
-import  SvgUri  from 'react-native-svg-uri';
 import { Int32 } from 'react-native/Libraries/Types/CodegenTypes';
+import IconComponent from './assets/icons/IconComponent';
 
 var navigation_:any;
 const PerfilProducto = ({route, navigation}:any) => {
@@ -41,7 +41,7 @@ const PerfilProducto = ({route, navigation}:any) => {
     }, []);
 
     const pintarDatos=()=>{
-        return  <View style={styles.card}>
+        return  <View style={{...styles.card,marginBottom:20}}>
         <Text style={{textAlign:'center', fontWeight:'bold', color:'#fff', marginTop:20}}>DATOS DEL PRODUCTO</Text>
         <Text style={{...styles.texto, marginTop:20, textAlign:'center', textTransform:'capitalize'}}>{route.params.RIESGO}</Text>
         <View style={styles.dato}>
@@ -120,7 +120,7 @@ const PerfilProducto = ({route, navigation}:any) => {
     const pintarPlanPagos=()=>{
         return <View style={styles.card}>
             <TouchableOpacity onPress={() =>toBack()}>
-                <SvgUri width={40} height={40}  fill='white' source={require('./assets/icons/left_circle.svg')}></SvgUri>
+                <IconComponent nameIcon="iconLeftCircle" alto="38px" ancho="38px" color="none"></IconComponent>
             </TouchableOpacity>
             <Text style={{fontWeight:'bold', textAlign:'center', marginTop:20, marginBottom:20, ...styles.texto}}>PLAN DE PAGOS</Text>
             {
@@ -136,24 +136,16 @@ const PerfilProducto = ({route, navigation}:any) => {
                         <Text style={styles.texto}>Sin plan de pagos</Text>
                     </View>
             }
-            <View style={{height:20}}></View>
         </View>
     };
 
     const pintar=()=>{
-        return <View>
-            <View style={{height:'6%'}}>
-                <Image 
-                    style={{width:'100%',height:'100%'}}
-                    resizeMode='stretch'
-                    source={{uri: api.url+"/perfilCia/"+route.params.NIT_COMPANIA+'_bar'}}
-                />
-            </View>
+        return <ScrollView style={{flex:1}}>
+
             {pintarPlanPagos()}
             {pintarEjecutivoAtiende()}
             {pintarDatos()}
-            <View style={{height:40}}></View>            
-        </View>
+        </ScrollView>
     };
 
 
@@ -162,9 +154,14 @@ const PerfilProducto = ({route, navigation}:any) => {
             {<ImageBackground 
                 source={require('../images/fondoBlanco.jpeg')}
                 style={{height:'100%', width:'100%'}}>
-                <ScrollView contentContainerStyle={{flexGrow:1}}>
-                        {data?pintar():<View style={{flex:1, justifyContent:'center', alignItems:'center' ,backgroundColor:'rgba(0,0,0,0.7)'}}><ActivityIndicator size={'large'} color={'white'}/></View>}
-                </ScrollView>
+                <View style={{height:70}}>
+                    <Image 
+                        style={{width:'100%',height:'100%'}}
+                        resizeMode='stretch'
+                        source={{uri: api.url+"/perfilCia/"+route.params.NIT_COMPANIA+'_bar'}}
+                    />
+                </View>
+                {data?pintar():<View style={{flex:1, justifyContent:'center', alignItems:'center' ,backgroundColor:'rgba(0,0,0,0.7)'}}><ActivityIndicator size={'large'} color={'white'}/></View>}
            </ImageBackground>}
         </View>
     )
@@ -217,15 +214,14 @@ const getFechaLiteral =(fecha:any) =>{
 const verificarEstadoPago =(estado:Int32)=>{
     if(estado == 1){
         return <View style={{width:15}}>
-                <SvgUri width={20} height={20} source={require('./assets/icons/box_checkBox.svg')}></SvgUri>
+                <IconComponent nameIcon="iconCheckFalse" alto="25px" ancho="25px" color="none"></IconComponent>
             </View>
     }else{
         return <View style={{width:15}}>
-                <SvgUri width={20} height={20} source={require('./assets/icons/checked_checkBox.svg')}></SvgUri>
+                <IconComponent nameIcon="iconCheckTrue" alto="25px" ancho="25px" color="none"></IconComponent>
             </View>
     }
 }
-
 const compararFecha =(fechaProx:any,fechaActual:any,estado:any,pos:any)=>{
     if(!fechaProx || fechaProx == ''){
         return ''
@@ -239,15 +235,15 @@ const compararFecha =(fechaProx:any,fechaActual:any,estado:any,pos:any)=>{
     var date_prox = new Date(fechaProx);
     var date_actual = new Date(fechaActual);
 
-    date_prox = new Date(aux_fechaProx[0], aux_fechaProx[1],aux_fechaProx[2])
-    date_actual = new Date(aux_fechaProx[0], aux_fechaProx[1],aux_fechaProx[2]) 
+    date_prox = new Date(aux_fechaProx[2], aux_fechaProx[1],aux_fechaProx[0])
+    date_actual = new Date(aux_fechaActual[2], aux_fechaActual[1],aux_fechaActual[0]) 
     if(estado === 0){
         return <Text style={{color:'green',width:'55%'}}>{pos+')  '+ getFechaLiteral(fechaProx)}</Text>
     }else{
-        if(date_prox <= date_actual && estado > 0){
-            return <Text style={{color:'red',width:'55%'}}>{pos +')  '+ getFechaLiteral(fechaProx)}</Text>
+        if(date_prox > date_actual && estado > 0){
+            return <Text style={{color:'white',width:'55%'}}>{pos +')  '+ getFechaLiteral(fechaProx)}</Text>
         }else{
-            return <Text style={{color:'white',width:'55%'}}>{pos+')  '+ getFechaLiteral(fechaProx)}</Text>
+            return <Text style={{color:'red',width:'55%'}}>{pos+')  '+ getFechaLiteral(fechaProx)}</Text>
         }
     }    
 }

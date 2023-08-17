@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View,Modal,Button} from 'react-native';
 
 
-const ModalComponent = ({visible,onClose,id_modal,children}) => {
+const ModalComponent = ({visible,onClose,id_modal,children}:any) => {
     return <View key={id_modal+'_md'} style={styles.container}>
             <Modal visible={visible} animationType='slide' transparent>
             <View style={styles.modalContainer}>

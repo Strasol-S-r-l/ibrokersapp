@@ -28,7 +28,7 @@ const Splash = ({navigation}:any) => {
   const onEnd=async()=>{
 
     try {
-      navigation_.replace("Menu");
+      navigation_.replace("Ppl");
     } catch (error) {
       
       console.log(error); 

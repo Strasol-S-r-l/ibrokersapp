@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, ScrollView, Text, View } from 'react-native';
 import ModalComponent from './ModalComponent';
 
-
-const ButtonModal = ({ list_seg, id_key }) => {
+const ButtonModal = ({ list_seg, id_key }:any) => {
 
     //modal
     const [modalVisible, setModalVisible] = useState(false);
@@ -24,12 +23,16 @@ const ButtonModal = ({ list_seg, id_key }) => {
             return <Text>No tiene Seguimientos</Text>
         }
         let array = [];
+        if (typeof seguimientos === 'string') {
+            seguimientos = JSON.parse(seguimientos);
+        } 
+        
         for (var i = 0; i < seguimientos.length; i++) {
             let seguimiento = seguimientos[i];
             array.push(
                 <View key={id_key + '_modal_content_item' + i} style={{ borderBottomWidth: 1, paddingTop: 5, paddingBottom: 5 }}>
                 <View>
-                    <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'black' }}> SEGUIMIENTO {' ' + (i + 1)} </Text>
+                    <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'black' }}>{'Seguimiento de ' + getFechaLiteral(seguimiento.FECHA)} a las {getHoraLiteral(seguimiento.FECHA)}</Text>
                 </View>
                 <View>
                     <Text style={{ fontWeight: 'bold', color: 'black' }}>NOMBRE :</Text>
@@ -65,7 +68,7 @@ const ButtonModal = ({ list_seg, id_key }) => {
     }
     return (list_seg && <View>
         {
-            <TouchableOpacity style={{ display: 'flex', flexDirection: 'row', borderWidth: 1, borderRadius: 5, alignItems: 'center', justifyContent: 'center' }} onPress={() => openModal()}>
+            <TouchableOpacity style={{ display: 'flex', flexDirection: 'row', borderRadius: 5, alignItems: 'center', justifyContent: 'center',backgroundColor:'#17594A' }} onPress={() => openModal()}>
                 <Text style={{ color: 'white' }}>Ver Detalle</Text>
             </TouchableOpacity>
         }
@@ -121,5 +124,28 @@ const getFechaLiteral = (fecha: any) => {
             break;
     }
     return array[0] + ' de ' + array[1] + ' ' + array[2]
+}
+const getHoraLiteral = (fecha: any) => {
+    var fechaLit = new Date(fecha);
+    const hours = fechaLit.getHours();
+    const minutes = fechaLit.getMinutes();
+    const seconds = fechaLit.getSeconds();
+    
+    let hora = hours+'';
+    let minuto = minutes+'';
+    let segundo = seconds+'';
+    let aux = "PM";
+    if(hours < 10){
+        hora = '0'+hours;
+        aux = 'AM';
+    }
+    if(minutes < 10){
+        minuto = '0'+minutes;
+    }
+    if(seconds < 10){
+        segundo = '0'+seconds;
+    }
+
+    return hora +":"+minuto+' '+aux;
 }
 export default ButtonModal;
