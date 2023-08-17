@@ -29,7 +29,7 @@ const Home = ({navigation}:any) => {
                 });
                 const data = await response.json();
                 if(data) {
-                    navigation_.replace("Menu");
+                    navigation_.replace("Ppl");
                     return;
                 }else{  
                     await new Promise<void>(resolve => setTimeout(resolve, 10000));

@@ -4,10 +4,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../enviroments/api.json'
 import BarFooter from './BarFooter';
 import SiniestroView from './SiniestroView';
+import { useIsFocused } from '@react-navigation/native';
 
 var navigation_: any;
 var lazy_list = [];
 const Siniestros = ({ route, navigation }: any) => {
+    const isFocused = useIsFocused();
     navigation_ = navigation;
     const [data, setData] = useState(null);
     useEffect(() => {
