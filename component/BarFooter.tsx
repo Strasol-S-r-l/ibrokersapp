@@ -45,7 +45,8 @@ const BarFooter = () => {
                 <IconComponent nameIcon="iconPolizaFot" alto="35px" ancho="35px" color="gray"></IconComponent>
                 <Text style={styles.text_footer}>Seguros</Text>
             </TouchableOpacity>
-            <TouchableOpacity key={"btn_footer_siniestro"} style={styles.item_footer} onPress={()=>openModal()}>
+            
+            <TouchableOpacity key={"btn_footer_siniestro"} style={styles.item_footer}  onPress={() => action('Automotor')}>
                 <IconComponent nameIcon="iconSiniestroFot" alto="35px" ancho="35px" color="gray"></IconComponent>
                 <Text style={styles.text_footer}>Siniestro</Text>
             </TouchableOpacity>

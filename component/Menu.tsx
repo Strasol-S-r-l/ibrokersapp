@@ -6,12 +6,13 @@ import BarFooter from './BarFooter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const data = [
+    "Automotor",
     "Usuarios",
     "Ppl",
     "Mapa",
     "Perfil",
     "Videos",
-    "Siniestros",
+    "Siniestros"
 ];
 
 const action=(algo:string)=>{
