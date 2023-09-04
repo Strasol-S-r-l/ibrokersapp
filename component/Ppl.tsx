@@ -4,6 +4,7 @@ import BarFooter from './BarFooter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../enviroments/api.json'
 import PplView from './PplView';
+import IconComponent from './assets/icons/IconComponent';
 
 var navigation_:any;
 const Ppl = ({navigation}:any) => {
@@ -72,14 +73,13 @@ const Ppl = ({navigation}:any) => {
 
     navigation_ = navigation;
     return (
-        <View >
-            { <ImageBackground 
-                source={require('../images/fondo.png')}
-                style={{height:'100%', width:'100%'}}>
+            <View style={{width:"100%",height:"100%"}}>
+                <View style={{position:'absolute' ,width:500, height:500}}> 
+                    <IconComponent nameIcon='fondo' alto='20px' ancho ='20px' colors={{color_1:"#BBEEAA",color_2:"#334477"}}></IconComponent>
+                </View>
                 {data?productos():<View style={{flex:1, width:'100%', justifyContent:'center', alignItems:'center' ,backgroundColor:'rgba(0,0,0,0.7)'}}><ActivityIndicator size={'large'} color={'white'}/></View>}
                 <BarFooter></BarFooter>
-            </ImageBackground> }        
-        </View>
+            </View>
     )
 };
 

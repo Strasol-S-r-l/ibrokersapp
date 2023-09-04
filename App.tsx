@@ -15,6 +15,7 @@ import Mapa from './component/Mapa';
 import Videos from './component/Videos';
 import Siniestros from './component/Siniestros';
 import SiniestrosAll from './component/SiniestroView';
+import Automotor from './component/Automotor';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ function App(): JSX.Element {
         <Stack.Screen name="Perfil" component={Perfil} />
         <Stack.Screen name="Videos" component={Videos} />
         <Stack.Screen name="Siniestros" component={Siniestros} />
+        <Stack.Screen name="Automotor" component={Automotor} />
       </Stack.Navigator>
     </NavigationContainer>
   );

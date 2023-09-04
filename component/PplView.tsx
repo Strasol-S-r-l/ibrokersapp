@@ -6,6 +6,7 @@ import IconComponent from './assets/icons/IconComponent';
 import RNFetchBlob from 'rn-fetch-blob';
 import ModalComponent from './ModalComponent';
 
+const uniqueTimestamp = new Date().getTime()+'';
 const PplView = ({ tipo, item }: any) => {
     const screenWidth = Dimensions.get('window').width;
     const screenHeight = Dimensions.get('window').height;
@@ -133,7 +134,7 @@ const PplView = ({ tipo, item }: any) => {
             <View style={{ height: '10%' }}>
                 <Image key={'images_' + producto.NIT_COMPANIA + '_bar_' + producto.ID}
                     style={{ width: '100%', height: '100%' }}
-                    source={{ uri: api.url + "/perfilCia/" + producto.NIT_COMPANIA + '_bar' }}
+                    source={{ uri: api.url + "/perfilCia/" + producto.NIT_COMPANIA + '_bar?timestamo='+uniqueTimestamp }}
                     resizeMode='stretch'
                 />
             </View>
@@ -141,7 +142,7 @@ const PplView = ({ tipo, item }: any) => {
                 <Image
                     style={{ height: '100%', width: '100%' }}
                     // source={require('../images/prub_riesgo.jpg')}
-                    source={{ uri: api.url + "/imagesRiesgo/" + producto.ID_RIESGO }}
+                    source={{ uri: api.url + "/imagesRiesgo/" + producto.ID_RIESGO+ '?timestamo='+uniqueTimestamp}}
                     resizeMode='stretch'
                 />
             </View>
@@ -212,7 +213,7 @@ const PplView = ({ tipo, item }: any) => {
                 <Text style={{ ...styles.texto, width: '35%' }}>{producto.CARTAS[index].DESCRIPCION}</Text>
                 <Text style={{ ...styles.texto, width: '55%' }}>{(producto.CARTAS[index].OBSERVACION)}</Text>
                 <TouchableOpacity style={{alignContent:'center',marginLeft:6}} key={producto.CARTAS[index].ID + "_carta_producto_" + index} onPress={() => identificarOS(producto.CARTAS[index].DOCUMENTO)}>
-                    {producto.CARTAS[index].DOCUMENTO ? <IconComponent nameIcon="iconCloudDownload" alto="20px" ancho="20px" color="#4477CE"></IconComponent> : <></>
+                    {producto.CARTAS[index].DOCUMENTO ? <IconComponent nameIcon="iconCloudDownload" alto="20px" ancho="20px" colors={{color_1:"#4477CE"}}></IconComponent> : <></>
                     }
                 </TouchableOpacity>
             </View>)
@@ -226,7 +227,7 @@ const PplView = ({ tipo, item }: any) => {
             </View>
         </View>
     }
-    const pintarBloqueSniestro = (tipo, producto) => {
+    const pintarBloqueSniestro = (tipo:any, producto:any) => {
         if (producto.COUNT_ABIERTO == 0 && producto.COUNT_CERRADO == 0) {
             return <View></View>
         }
@@ -345,7 +346,6 @@ const getFechaLiteral = (fecha: any) => {
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
         paddingBottom: 5,
         paddingLeft: 5,
         paddingRight: 5
