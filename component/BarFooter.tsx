@@ -22,11 +22,15 @@ const BarFooter = () => {
         setModalVisible(false);
     }
 
-    const abrirModal = (modalVisible: any, closeModal: any) => {
+    const abrirCallModal = (modalVisible: any, closeModal: any) => {
         return <View>
 
             <ModalComponent id_modal={'modal_siniestro_buscar'} visible={modalVisible} onClose={closeModal}>
+                <View style={{position:'absolute' ,width:"120%", height:"120%"}}> 
+                        <IconComponent nameIcon='fondoCard' alto='100%' ancho ='100%' colors={{color_1:"#BBEEAA",color_2:"#334477"}}></IconComponent>
+                </View>
                 <View style={{width:'100%'}}>
+                    
                     <TouchableOpacity style={{margin:5, padding:5, borderRadius:5, height:45, backgroundColor:'#17594A', justifyContent:'center',shadowColor:'black',shadowOffset:{width:0,height:2}, shadowRadius:5,shadowOpacity:0.3}}  onPress={() => actionSiniestro('Siniestros',{tipo:'Abierto'})}>
                         <Text style={{textAlign:"center", color:'white', fontWeight:'bold'}}>ABIERTOS</Text>
                     </TouchableOpacity>
@@ -42,31 +46,35 @@ const BarFooter = () => {
     }
     return <View style={styles.footer}>
             <TouchableOpacity key={"btn_footer_ppl"} style={styles.item_footer}  onPress={() => action('Ppl')}>
-                <IconComponent nameIcon="iconPolizaFot" alto="35px" ancho="35px" color="gray"></IconComponent>
+                <IconComponent nameIcon="iconPolizaFot" alto="35px" ancho="35px" colors={{color_1:"gray"}}></IconComponent>
                 <Text style={styles.text_footer}>Seguros</Text>
             </TouchableOpacity>
             
             <TouchableOpacity key={"btn_footer_siniestro"} style={styles.item_footer}  onPress={() => action('Automotor')}>
-                <IconComponent nameIcon="iconSiniestroFot" alto="35px" ancho="35px" color="gray"></IconComponent>
+                <IconComponent nameIcon="iconSiniestroFot" alto="35px" ancho="35px" colors={{color_1:"gray"}}></IconComponent>
                 <Text style={styles.text_footer}>Siniestro</Text>
+            </TouchableOpacity>
+            <View style={styles.item_footer}></View>
+            <TouchableOpacity key={"btn_footer_call"} style={{display:"flex",justifyContent:"center",borderColor:"gray",borderWidth:5,borderRadius:50,position:'absolute',height:"120%",top:"-20%",left:"38%",right:"38%",alignItems:"center",backgroundColor:"#DFD7D5"}}  onPress={() => openModal()}>
+                <IconComponent nameIcon="call" alto="50px" ancho="50px" colors={{color_1:"gray"}}></IconComponent>
             </TouchableOpacity>
            
             <TouchableOpacity key={"btn_footer_mapa"} style={styles.item_footer} onPress={() => action('Mapa')}>
-                <IconComponent nameIcon="iconOficinaFot" alto="35px" ancho="35px" color="gray"></IconComponent>
+                <IconComponent nameIcon="iconOficinaFot" alto="35px" ancho="35px" colors={{color_1:"gray"}}></IconComponent>
                 <Text style={styles.text_footer}>Oficinas</Text>
             </TouchableOpacity>
             <TouchableOpacity key={"btn_footer_contacto"} style={styles.item_footer } onPress={() => action('Usuarios')}>
-                <IconComponent nameIcon="iconContactoFot" alto="35px" ancho="35px" color="gray"></IconComponent>
+                <IconComponent nameIcon="iconContactoFot" alto="35px" ancho="35px" colors={{color_1:"gray"}}></IconComponent>
                 <Text style={styles.text_footer}>Contacto</Text>
             </TouchableOpacity>
-            {abrirModal(modalVisible, closeModal)}
+            {abrirCallModal(modalVisible, closeModal)}
     </View>
 };
 
 const styles = StyleSheet.create({
     footer:{
         backgroundColor:'#DFD7D5',
-        height: '10%',
+        height: '9.5%',
         display:'flex', 
         flexDirection:'row', 
         justifyContent:'space-between',
