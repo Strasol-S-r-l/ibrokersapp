@@ -16,7 +16,7 @@ keytool -import -alias key0 -file output.pem -keystore app.jks -storepass pass -
 
 echo y |
 keytool -genkeypair -dname "cn=Strasol, ou=Strasol, o=SRL, c=BO" -alias key0 -keypass pass -keystore android.keystore -storepass pass -validity 20000
-echo y | keytool -genkeypair -dname "cn=Strasol, ou=Strasol, o=SRL, c=BO" -alias key0 -keypass pass -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 9125 -keystore app.jks  -storepass pass
+echo y | keytool -genkeypair -dname "cn=Strasol, ou=Strasol, o=SRL, c=BO" -alias key0 -keypass pass -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 365 -keystore app.jks  -storepass pass
 
 ```
 
@@ -29,3 +29,12 @@ The Android App Bundle was signed with the wrong key.
 `
 
 keytool -exportcert -keystore app.jks -alias key0 -file servisoftsapp.crt
+
+
+
+
+- Despues de descargar el proyexto desde git es necesario configurar la direccion del sdk de android. Para esto se crear un archivo 
+en la raiz de la carpeta android con el nombre `local.properties` y este contiene el campo `sdk.dir=<direccion del sdk>`
+- Luego ejecutar el comando `./bin/secrets unbuild -p <la contraena que se encuentra en el repo secrets>`
+- Una vez agregada esa direccion hay que hacer `npm install` para agregar los node_modules
+- Luego npm start y deberia funcionar correctamente.
