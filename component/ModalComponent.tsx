@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View,Modal,Button} from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { StyleSheet, View,Modal,Button,Text} from 'react-native';
 
 
 const ModalComponent = ({visible,onClose,id_modal,children}:any) => {
@@ -8,7 +9,9 @@ const ModalComponent = ({visible,onClose,id_modal,children}:any) => {
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     {children}
-                    <Button key={id_modal+'_md_btn'} title='Cerrar' onPress={onClose}></Button>
+                    <TouchableOpacity key={id_modal+'_md_btn'}  onPress={onClose} style={{margin:5, padding:5, borderRadius:5, height:45, backgroundColor:'brown', justifyContent:'center',shadowColor:'black',shadowOffset:{width:0,height:2}, shadowRadius:5,shadowOpacity:0.3 }}>
+                        <Text style={{textAlign:"center", color:'white', fontWeight:'bold'}}>CERRAR</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
           </Modal>
@@ -29,9 +32,9 @@ const styles = StyleSheet.create({
         backgroundColor:'rgba(0,0,0,0.5)'
     },
     modalContent:{
-        backgroundColor:'white',
         padding:16,
-        borderRadius:8
+        borderRadius:8,
+        position:'relative'
     }
 })
 export default ModalComponent;

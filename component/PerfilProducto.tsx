@@ -139,21 +139,24 @@ const PerfilProducto = ({route, navigation}:any) => {
     };
 
     const pintar=()=>{
-        return<View style={{flex:1,backgroundColor:'white'}}> 
-        <View style={{position:'absolute',height:'100%',top:-1}}>
-            <IconComponent nameIcon="fondo" alto="20px" ancho="20px" colors={{color_1:"#BBEEAA",color_2:"#334477"}}/>             
-        </View>
-        <ScrollView style={{marginLeft:10,marginRight:10}}>
-            {pintarPlanPagos()}
-            {pintarEjecutivoAtiende()}
-            {pintarDatos()}
-        </ScrollView>
+        return<View style={{flex:1}}> 
+            <View style={{position:'absolute',top:0,bottom:0,left:0,right:0}}> 
+                    <IconComponent nameIcon='fondo' alto='20px' ancho ='20px' colors={{color_1:"#BBEEAA",color_2:"#334477"}}></IconComponent>
+                </View>
+            <ScrollView style={{marginLeft:10,marginRight:10}}>
+                {pintarPlanPagos()}
+                {pintarEjecutivoAtiende()}
+                {pintarDatos()}
+            </ScrollView>
         </View>
     };
 
 
     return (
-        <View style={{height:'100%'}}>
+        <View style={{flex:1}}>
+            <View style={{position:'absolute',top:-1}}>
+                    <IconComponent nameIcon="fondo" alto="20px" ancho="20px" colors={{color_1:"#BBEEAA",color_2:"#334477"}}/>             
+            </View>
             {
                 <>
                 <View style={{height:70}}>

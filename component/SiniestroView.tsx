@@ -188,7 +188,7 @@ const SiniestroView = ({ item }: any) => {
                 </View>
                 <View style={{ height: "85%"}}>
                 <TouchableOpacity key={siniestro.ID_RIESGO+'_btn_toback'} style={{position:'absolute',zIndex:100,width:40,height:40}} onPress={() =>toBack()}>
-                    <IconComponent nameIcon="iconLeftCircle" alto="40px" ancho="40px" colors={{color_1:""}}></IconComponent>
+                    <IconComponent nameIcon="iconLeftCircle" alto="40px" ancho="40px" colors={{color_1:"none"}}></IconComponent>
                 </TouchableOpacity>
                     <Image
                         style={{ height: '100%', width: "100%" }}

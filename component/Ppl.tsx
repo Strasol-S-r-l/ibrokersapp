@@ -73,8 +73,8 @@ const Ppl = ({navigation}:any) => {
 
     navigation_ = navigation;
     return (
-            <View style={{width:"100%",height:"100%"}}>
-                <View style={{position:'absolute' ,width:500, height:500}}> 
+            <View style={{width:"100%",height:"100%" ,position:"relative"}}>
+                <View style={{position:'absolute',top:0,bottom:0,left:0,right:0}}> 
                     <IconComponent nameIcon='fondo' alto='20px' ancho ='20px' colors={{color_1:"#BBEEAA",color_2:"#334477"}}></IconComponent>
                 </View>
                 {data?productos():<View style={{flex:1, width:'100%', justifyContent:'center', alignItems:'center' ,backgroundColor:'rgba(0,0,0,0.7)'}}><ActivityIndicator size={'large'} color={'white'}/></View>}
