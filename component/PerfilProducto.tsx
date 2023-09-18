@@ -14,7 +14,6 @@ const PerfilProducto = ({route, navigation}:any) => {
     useEffect(() => { 
         navigation_.setOptions({headerShown:false});
          
-        console.log(JSON.stringify(route))
         const fetchData = async () => {
           try {
             const suser:any = await AsyncStorage.getItem("usuario");
@@ -120,12 +119,12 @@ const PerfilProducto = ({route, navigation}:any) => {
     const pintarPlanPagos=()=>{
         return <View style={styles.card}>
             <TouchableOpacity onPress={() =>toBack()}>
-                <IconComponent nameIcon="iconLeftCircle" alto="38px" ancho="38px" color="none"></IconComponent>
+                <IconComponent nameIcon="iconLeftCircle" alto="38px" ancho="38px" colors={{color_1:""}}></IconComponent>
             </TouchableOpacity>
             <Text style={{fontWeight:'bold', textAlign:'center', marginTop:20, marginBottom:20, ...styles.texto}}>PLAN DE PAGOS</Text>
             {
                 data.PLAN_PAGOS?
-                data.PLAN_PAGOS.map((plan_pago, i)=>{
+                data.PLAN_PAGOS.map((plan_pago:any, i:any)=>{
                     return <View key={i} style={styles.plan_pago}>
                         {compararFecha(plan_pago.FECHA_PAGO,data?.FECHA_ACTUAL,plan_pago.ESTADO_PAGO,(i+1))}
                         <Text style={{...styles.texto,width:'35%',textAlign:'right'}}>{data.MONEDA.ACRONIMO} {plan_pago.PRIMA.toLocaleString()}</Text>
@@ -140,20 +139,26 @@ const PerfilProducto = ({route, navigation}:any) => {
     };
 
     const pintar=()=>{
-        return <ScrollView style={{flex:1}}>
-
-            {pintarPlanPagos()}
-            {pintarEjecutivoAtiende()}
-            {pintarDatos()}
-        </ScrollView>
+        return<View style={{flex:1}}> 
+            <View style={{position:'absolute',top:0,bottom:0,left:0,right:0}}> 
+                    <IconComponent nameIcon='fondo' alto='20px' ancho ='20px' colors={{color_1:"#BBEEAA",color_2:"#334477"}}></IconComponent>
+                </View>
+            <ScrollView style={{marginLeft:10,marginRight:10}}>
+                {pintarPlanPagos()}
+                {pintarEjecutivoAtiende()}
+                {pintarDatos()}
+            </ScrollView>
+        </View>
     };
 
 
     return (
-        <View>
-            {<ImageBackground 
-                source={require('../images/fondoBlanco.jpeg')}
-                style={{height:'100%', width:'100%'}}>
+        <View style={{flex:1}}>
+            <View style={{position:'absolute',top:-1}}>
+                    <IconComponent nameIcon="fondo" alto="20px" ancho="20px" colors={{color_1:"#BBEEAA",color_2:"#334477"}}/>             
+            </View>
+            {
+                <>
                 <View style={{height:70}}>
                     <Image 
                         style={{width:'100%',height:'100%'}}
@@ -162,7 +167,8 @@ const PerfilProducto = ({route, navigation}:any) => {
                     />
                 </View>
                 {data?pintar():<View style={{flex:1, justifyContent:'center', alignItems:'center' ,backgroundColor:'rgba(0,0,0,0.7)'}}><ActivityIndicator size={'large'} color={'white'}/></View>}
-           </ImageBackground>}
+                </>
+           }
         </View>
     )
 };
@@ -214,11 +220,11 @@ const getFechaLiteral =(fecha:any) =>{
 const verificarEstadoPago =(estado:Int32)=>{
     if(estado == 1){
         return <View style={{width:15}}>
-                <IconComponent nameIcon="iconCheckFalse" alto="25px" ancho="25px" color="none"></IconComponent>
+                <IconComponent nameIcon="iconCheckFalse" alto="25px" ancho="25px" colors={{color_1:"white"}}></IconComponent>
             </View>
     }else{
         return <View style={{width:15}}>
-                <IconComponent nameIcon="iconCheckTrue" alto="25px" ancho="25px" color="none"></IconComponent>
+                <IconComponent nameIcon="iconCheckTrue" alto="25px" ancho="25px" colors={{color_1:"white"}}></IconComponent>
             </View>
     }
 }
@@ -272,16 +278,13 @@ const styles = StyleSheet.create({
     card:{
         marginTop:5, 
         borderRadius:10,
-        marginLeft:10,
-        marginRight:10,
         backgroundColor:'#000000aa', 
-        padding:10,
-        elevation:5,
-        shadowColor:'#000',
+        padding:10,  
+        elevation: 5,
+        shadowColor: '#000',
         shadowOpacity: 0.7,
-        shadowOffset:{width:5,height:5},
-        shadowRadius:4,
-        
+        shadowOffset: { width: 5, height: 5 },
+        shadowRadius: 4,              
     }
 });
 export default PerfilProducto;

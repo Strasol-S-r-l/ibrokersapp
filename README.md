@@ -29,3 +29,12 @@ The Android App Bundle was signed with the wrong key.
 `
 
 keytool -exportcert -keystore app.jks -alias key0 -file servisoftsapp.crt
+
+
+
+
+- Despues de descargar el proyexto desde git es necesario configurar la direccion del sdk de android. Para esto se crear un archivo 
+en la raiz de la carpeta android con el nombre `local.properties` y este contiene el campo `sdk.dir=<direccion del sdk>`
+- Luego ejecutar el comando `./bin/secrets unbuild -p <la contraena que se encuentra en el repo secrets>`
+- Una vez agregada esa direccion hay que hacer `npm install` para agregar los node_modules
+- Luego npm start y deberia funcionar correctamente.

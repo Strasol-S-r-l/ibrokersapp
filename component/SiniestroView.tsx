@@ -137,7 +137,7 @@ const SiniestroView = ({ item }: any) => {
                     {doc.DESCRIPCION}
                 </Text>
                 <TouchableOpacity key={doc.ID + "_doc_siniestro"} onPress={() => identificarOS(doc.DATO)}>
-                    <IconComponent nameIcon="iconCloudDownload" alto="20px" ancho="20px" color="#4477CE"></IconComponent>                
+                    <IconComponent nameIcon="iconCloudDownload" alto="20px" ancho="20px" colors={{color_1:"#4477CE"}}></IconComponent>                
                 </TouchableOpacity>
             </View>)
         }       
@@ -188,7 +188,7 @@ const SiniestroView = ({ item }: any) => {
                 </View>
                 <View style={{ height: "85%"}}>
                 <TouchableOpacity key={siniestro.ID_RIESGO+'_btn_toback'} style={{position:'absolute',zIndex:100,width:40,height:40}} onPress={() =>toBack()}>
-                    <IconComponent nameIcon="iconLeftCircle" alto="40px" ancho="40px" color="none"></IconComponent>
+                    <IconComponent nameIcon="iconLeftCircle" alto="40px" ancho="40px" colors={{color_1:"none"}}></IconComponent>
                 </TouchableOpacity>
                     <Image
                         style={{ height: '100%', width: "100%" }}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, ScrollView, Text, View } from 'react-native';
 import ModalComponent from './ModalComponent';
+import IconComponent from './assets/icons/IconComponent';
 
 const ButtonModal = ({ list_seg, id_key }:any) => {
 
@@ -30,25 +31,25 @@ const ButtonModal = ({ list_seg, id_key }:any) => {
         for (var i = 0; i < seguimientos.length; i++) {
             let seguimiento = seguimientos[i];
             array.push(
-                <View key={id_key + '_modal_content_item' + i} style={{ borderBottomWidth: 1, paddingTop: 5, paddingBottom: 5 }}>
+                <View key={id_key + '_modal_content_item' + i} style={{ borderBottomWidth: 1, borderColor:"white", paddingTop: 5, paddingBottom: 5 }}>
                 <View>
-                    <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'black' }}>{'Seguimiento de ' + getFechaLiteral(seguimiento.FECHA)} a las {getHoraLiteral(seguimiento.FECHA)}</Text>
+                    <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'white' }}>{'Seguimiento de ' + getFechaLiteral(seguimiento.FECHA)} a las {getHoraLiteral(seguimiento.FECHA)}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: 'black' }}>NOMBRE :</Text>
-                    <Text style={{ color: 'black' }}>{seguimiento.USUARIO || ''}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white' }}>NOMBRE :</Text>
+                    <Text style={{ color: 'white' }}>{seguimiento.USUARIO || ''}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: 'black' }}>ESTADO :</Text>
-                    <Text style={{ color: 'black' }}>{seguimiento.ESTADOS_CERRADOS || ''}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white' }}>ESTADO :</Text>
+                    <Text style={{ color: 'white' }}>{seguimiento.ESTADOS_CERRADOS || ''}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: 'black' }}>FECHA :</Text>
-                    <Text style={{ color: 'black' }}>{getFechaLiteral(seguimiento.FECHA)}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white' }}>FECHA :</Text>
+                    <Text style={{ color: 'white' }}>{getFechaLiteral(seguimiento.FECHA)}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: 'black' }}>OBSERVACION :</Text>
-                    <Text style={{ color: 'black' }}>{seguimiento.OBSERVACION || ''}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white' }}>OBSERVACION :</Text>
+                    <Text style={{ color: 'white' }}>{seguimiento.OBSERVACION || ''}</Text>
                 </View>
             </View>
             )
@@ -60,6 +61,9 @@ const ButtonModal = ({ list_seg, id_key }:any) => {
     const abrirModalSeguros = (modalVisible: any, closeModal: any, seguimiento: any) => {
         return <View key={id_key + '_modal_container'} >
             <ModalComponent key={id_key + '_modal_body'} visible={modalVisible} onClose={closeModal} id_modal={id_key} >
+                <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}>
+                    <IconComponent nameIcon='fondoCard'colors={{ color_1: "#BBEEAA", color_2: "#334477" }}></IconComponent>
+                </View>
                 <ScrollView style={{ maxHeight: 400 }}>
                     {pintarSeguimiento(seguimiento)}
                 </ScrollView>
