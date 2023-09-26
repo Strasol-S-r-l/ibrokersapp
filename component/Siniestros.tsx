@@ -5,16 +5,15 @@ import api from '../enviroments/api.json'
 import BarFooter from './BarFooter';
 import SiniestroView from './SiniestroView';
 import { useIsFocused } from '@react-navigation/native';
+import IconComponent from './assets/icons/IconComponent';
 
 var navigation_: any;
 var lazy_list = [];
 const Siniestros = ({ route, navigation }: any) => {
-    const isFocused = useIsFocused();
     navigation_ = navigation;
     const [data, setData] = useState(null);
     useEffect(() => {
         navigation_.setOptions({ headerShown: false });
-
         const fetchData = async () => {
             try {
                 const suser: any = await AsyncStorage.getItem("usuario");
@@ -23,10 +22,10 @@ const Siniestros = ({ route, navigation }: any) => {
                     return;
                 }
                 const usuario = JSON.parse(suser);
-                let tipo = route?.params?.tipo;
+                let tipo = route?.params?.TIPO;
                 const id_producto = route?.params?.ID;
                 let all_item = true;
-                if (!route?.params?.tipo) {
+                if (!route?.params?.TIPO) {
                     tipo = 'All';
                 }
                 const response = await fetch(api.url + '/app',
@@ -36,7 +35,13 @@ const Siniestros = ({ route, navigation }: any) => {
                         body: JSON.stringify({ key: api.key, type: 'getSiniestros', ID: usuario.ID, TIPO: tipo, ID_PRODUCTO: id_producto, all_item }),
                     });
                 const data = await response.json();
-                setData(data.data);
+                if(data.data){
+                    setData(data.data);
+                }else{
+                    setData([]);    
+                }
+                
+               
 
             } catch (error) {
                 return { estado: "error", error };
@@ -58,16 +63,67 @@ const Siniestros = ({ route, navigation }: any) => {
                 keyExtractor={item => item.ID+"_ItemSiniestro"}
             />
     }
+    
+    const reloadView=(json:any)=>{
+        const fetchData = async () => {
+            setData(null);
+            try {
+                const suser: any = await AsyncStorage.getItem("usuario");
+                if (!suser || suser == null) {
+                    navigation_.replace("Login");
+                    return;
+                }
+                const usuario = JSON.parse(suser);
+                let tipo =json?.TIPO;
+                const id_producto = route?.params?.ID;
+                let all_item = true;
+                if (!json?.TIPO) {
+                    tipo = 'All';
+                }
+                const response = await fetch(api.url + '/app',
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', },
+                        body: JSON.stringify({ key: api.key, type: 'getSiniestros', ID: usuario.ID, TIPO: tipo, ID_PRODUCTO: id_producto, all_item }),
+                    });
+                const data = await response.json();
+                if(data.data){
+                    setData(data.data);
+                }else{
+                    setData([]);    
+                }
+                
+               
+
+            } catch (error) {
+                return { estado: "error", error };
+            }
+        }
+        fetchData();
+    }
+
     return (
-        <View >
-            <ImageBackground
-                source={require('../images/fondoBlanco.jpeg')}
-                style={{ height: '100%', width: '100%' }}>
-                    {data?paintView():<View style={{flex:1, width:'100%', justifyContent:'center', alignItems:'center' ,backgroundColor:'rgba(0,0,0,0.7)'}}><ActivityIndicator size={'large'} color={'white'}/></View>}
-                    <BarFooter></BarFooter>
-            </ImageBackground>
+        <View style={{ flex: 1 ,position:"relative"}}>
+          <View style={{ position: 'absolute',top:0,bottom:0,left:0,right:0 }}>
+            <IconComponent nameIcon='fondo' alto='20px' ancho='20px' data={{ color_1: "#BBEEAA", color_2: "#334477" }}></IconComponent>
+          </View>
+          {data ? (
+            data.length > 0 ? (
+              paintView()
+            ) : (
+              <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.7)' }}>
+                <Text>No hay datos disponibles en este momento.</Text>
+              </View>
+            )
+          ) : (
+            <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.7)' }}>
+              <ActivityIndicator size={'large'} color={'white'} />
+            </View>
+          )}
+          <BarFooter  ViewUpdate={reloadView}></BarFooter>
         </View>
-    )
+      );
+      
 };
 
 const styles = StyleSheet.create({

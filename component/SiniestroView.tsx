@@ -137,7 +137,7 @@ const SiniestroView = ({ item }: any) => {
                     {doc.DESCRIPCION}
                 </Text>
                 <TouchableOpacity key={doc.ID + "_doc_siniestro"} onPress={() => identificarOS(doc.DATO)}>
-                    <IconComponent nameIcon="iconCloudDownload" alto="20px" ancho="20px" color="#4477CE"></IconComponent>                
+                    <IconComponent nameIcon="iconCloudDownload" alto="20px" ancho="20px" data={{color_1:'skyblue'}} ></IconComponent>                
                 </TouchableOpacity>
             </View>)
         }       
@@ -187,8 +187,8 @@ const SiniestroView = ({ item }: any) => {
                     />
                 </View>
                 <View style={{ height: "85%"}}>
-                <TouchableOpacity key={siniestro.ID_RIESGO+'_btn_toback'} style={{position:'absolute',zIndex:100,width:40,height:40}} onPress={() =>toBack()}>
-                    <IconComponent nameIcon="iconLeftCircle" alto="40px" ancho="40px" color="none"></IconComponent>
+                <TouchableOpacity key={siniestro.ID_RIESGO+'_btn_toback'} style={{position:'absolute',zIndex:100,width:50,height:50}} onPress={() =>toBack()}>
+                    <IconComponent nameIcon="iconLeftCircle" alto="50px" ancho="50px" data={{color_1:'none'}}></IconComponent>
                 </TouchableOpacity>
                     <Image
                         style={{ height: '100%', width: "100%" }}
@@ -266,7 +266,7 @@ const SiniestroView = ({ item }: any) => {
 };
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#000000aa',
+        backgroundColor:'rgba(0,0,0,0.3)',
         paddingBottom: 5,
         paddingLeft: 5,
         paddingRight: 5

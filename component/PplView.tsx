@@ -264,15 +264,15 @@ const PplView = ({ tipo, item }: any) => {
         date_actual = new Date(aux_fechaActual[2], aux_fechaActual[1], aux_fechaActual[0])
 
         if (date_prox >= date_actual) {
-            return <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <Text style={{ width: '100%', color: 'white', textAlign: 'right' }}>{'   ' + getFechaLiteral(fechaProx)}</Text>
-            </View>
+            return<TouchableOpacity style={{ display: 'flex', height: 20, justifyContent: 'center', alignItems: 'center', borderRadius: 5,borderColor:'white',borderWidth:1,  width: '100%' }} onPress={() => action('PerfilProducto', { tipo: tipo, ...producto })}>
+                <Text style={{ width: '100%', color: 'white', textAlign: 'center' }}>{'   ' + getFechaLiteral(fechaProx)}</Text>
+            </TouchableOpacity> 
 
         }
         if (date_prox < date_actual) {
-            return <View>
-                <Text style={{ width: '100%',color: 'red', textAlign: 'right' }}>{'   ' + getFechaLiteral(fechaProx)}</Text>
-            </View>
+            return <TouchableOpacity style={{ display: 'flex', height: 20, justifyContent: 'center', alignItems: 'center',backgroundColor:'brown',borderRadius:5, width: '100%' }} onPress={() => action('PerfilProducto', { tipo: tipo, ...producto })}>
+                <Text style={{ width: '100%', color: 'white', textAlign: 'center' }}>{'   ' + getFechaLiteral(fechaProx)}</Text>
+            </TouchableOpacity> 
         }
     }
     const compararFechaIcon = (producto: any, tipo: any) => {

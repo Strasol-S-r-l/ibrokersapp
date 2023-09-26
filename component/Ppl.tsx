@@ -4,6 +4,7 @@ import BarFooter from './BarFooter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../enviroments/api.json'
 import PplView from './PplView';
+import IconComponent from './assets/icons/IconComponent';
 
 var navigation_:any;
 const Ppl = ({navigation}:any) => {
@@ -11,10 +12,6 @@ const Ppl = ({navigation}:any) => {
 
     const [data, setData] = useState(null);
 
-    const [refresh,setRefresh] = useState(false);
-    const recargarPagina =()=>{
-        setRefresh(!refresh);
-    };
     useEffect(() => { 
         navigation_.setOptions({headerShown:false});
          
@@ -70,16 +67,41 @@ const Ppl = ({navigation}:any) => {
         return <PplView tipo={item.TIPO} item={item}></PplView>
     };
 
+    const reloadView=()=>{
+        const fetchData = async () => {
+            setData(null);
+            try {
+  
+              const suser:any = await AsyncStorage.getItem("usuario");
+              if(!suser || suser==null){
+                  navigation_.replace("Login");
+                  return;
+              } 
+              const usuario = JSON.parse(suser);
+              const response = await fetch(api.url+'/app', 
+              {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json',},
+                  body: JSON.stringify({key:api.key, type:'getProductos', ID:usuario.ID}),                                       
+              });
+              const data = await response.json();
+              setData(data);
+            } catch (error) {
+              return {estado:"error", error};
+            }
+          }
+          fetchData();
+    }
+
     navigation_ = navigation;
     return (
-        <View >
-            { <ImageBackground 
-                source={require('../images/fondo.png')}
-                style={{height:'100%', width:'100%'}}>
+            <View style={{width:"100%",height:"100%" ,position:"relative"}}>
+                <View style={{position:'absolute',top:0,bottom:0,left:0,right:0}}> 
+                    <IconComponent nameIcon='fondo' alto='20px' ancho ='20px' data={{color_1:"#BBEEAA",color_2:"#334477"}}></IconComponent>
+                </View>
                 {data?productos():<View style={{flex:1, width:'100%', justifyContent:'center', alignItems:'center' ,backgroundColor:'rgba(0,0,0,0.7)'}}><ActivityIndicator size={'large'} color={'white'}/></View>}
-                <BarFooter></BarFooter>
-            </ImageBackground> }        
-        </View>
+                <BarFooter ViewUpdate={reloadView}></BarFooter>
+            </View>
     )
 };
 

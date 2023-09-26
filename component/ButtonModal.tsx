@@ -30,25 +30,25 @@ const ButtonModal = ({ list_seg, id_key }:any) => {
         for (var i = 0; i < seguimientos.length; i++) {
             let seguimiento = seguimientos[i];
             array.push(
-                <View key={id_key + '_modal_content_item' + i} style={{ borderBottomWidth: 1, paddingTop: 5, paddingBottom: 5 }}>
+                <View key={id_key + '_modal_content_item' + i} style={{ borderBottomWidth: 2, paddingTop: 5, paddingBottom: 5 ,borderColor:'white'}}>
                 <View>
-                    <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'black' }}>{'Seguimiento de ' + getFechaLiteral(seguimiento.FECHA)} a las {getHoraLiteral(seguimiento.FECHA)}</Text>
+                    <Text style={{ textAlign: 'center', fontWeight: 'bold', color: 'white' }}>{'Seguimiento de ' + getFechaLiteral(seguimiento.FECHA)} a las {getHoraLiteral(seguimiento.FECHA)}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: 'black' }}>NOMBRE :</Text>
-                    <Text style={{ color: 'black' }}>{seguimiento.USUARIO || ''}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white' }}>NOMBRE :</Text>
+                    <Text style={{ color: 'white' }}>{seguimiento.USUARIO || ''}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: 'black' }}>ESTADO :</Text>
-                    <Text style={{ color: 'black' }}>{seguimiento.ESTADOS_CERRADOS || ''}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white' }}>ESTADO :</Text>
+                    <Text style={{ color: 'white' }}>{seguimiento.ESTADOS_CERRADOS || ''}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: 'black' }}>FECHA :</Text>
-                    <Text style={{ color: 'black' }}>{getFechaLiteral(seguimiento.FECHA)}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white' }}>FECHA :</Text>
+                    <Text style={{ color: 'white' }}>{getFechaLiteral(seguimiento.FECHA)}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: 'black' }}>OBSERVACION :</Text>
-                    <Text style={{ color: 'black' }}>{seguimiento.OBSERVACION || ''}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white' }}>OBSERVACION :</Text>
+                    <Text style={{ color: 'white' }}>{seguimiento.OBSERVACION || ''}</Text>
                 </View>
             </View>
             )
